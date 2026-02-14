@@ -9,15 +9,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ConferenceController extends AbstractController
 {
-    #[Route('/hello/{name}', name: 'homepage')]
+    // #[Route('/hello/{name}', name: 'homepage')]
+    #[Route('/hello', name: 'homepage')]
     // public function index(string $name = ''): Response
     public function index(Request $request): Response
     {
         $greet = '';
 
-        // if ($name) {
-        //     $greet = sprintf('<h1>Hello %s!</h1>', htmlspecialchars($name));
-        // }
+        if ($request->query->has('name')) {
+            $greet = sprintf('<h1>Hello %s!</h1>', htmlspecialchars($request->query->get('name')));
+        }
 
         dump($request);
 
